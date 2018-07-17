@@ -1,0 +1,24 @@
+<div class="login-wrapper">
+  <form class="login">
+    <section class="title">
+      <h3 class="welcome">ยินดีต้อนรับ</h3>
+      ระบบจัดการงานซ่อมบำรุง
+      <h5 class="hint">ระบบบริหารจัดการงานซ่อมบำรุ่ง</h5>
+    </section>
+    <div class="login-group">
+      <div class="auth-source select">
+        <select name="login-auth-source-1" [(ngModel)]="typeId">
+          <option *ngFor="let type of userTypes" [value]="type.id">{{ type.name }}</option>
+        </select>
+      </div>
+      <input [(ngModel)]="username" class="username" type="text" name="login_username" placeholder="Username">
+      <input [(ngModel)]="password" class="password" type="password" name="login_password" placeholder="Password">
+
+      <div class="error active" *ngIf="isError">
+        Invalid user name or password
+      </div>
+      <button type="submit" [disabled]="!typeId || !username || !password" (click)="doLogin()" class="btn btn-primary">NEXT</button>
+      <a href="javascript://" class="signup">Sign up for a Company ID</a>
+    </div>
+  </form>
+</div>
