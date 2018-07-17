@@ -7,6 +7,7 @@ import { MainComponent } from './main/main.component';
 import { ClarityModule } from '../../../node_modules/@clr/angular';
 import { RequestComponent } from './request/request.component';
 import { AuthGuardService } from '../shared/auth-guard.service';
+import { StaffGuardService } from '../shared/staff-guard.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { AuthGuardService } from '../shared/auth-guard.service';
     StaffRoutingModule
   ],
   declarations: [LayoutComponent, MainComponent, RequestComponent],
-  providers: [AuthGuardService]
+  providers: [AuthGuardService, StaffGuardService]
 })
 export class StaffModule { }
