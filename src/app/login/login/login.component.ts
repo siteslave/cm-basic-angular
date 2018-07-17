@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     if (this.username === 'admin' && this.password === 'admin') {
       // go main page
       this.isError = false;
-      let token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MzE4MDE0MzcsImV4cCI6MTU2MzMzNzQzNywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsImZ1bGxuYW1lIjoiU2F0aXQgUmlhbnBpdCIsImVtYWlsIjoicmlhbnBpdEBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN0YWZmIn0.ETYHENYxqiuiKZEf12mEoEeomyouJE-6-95nEqRAQTY`;
+      let token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MzE4MDE0MzcsImV4cCI6MTU2MzMzNzQzNywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsImZ1bGxuYW1lIjoiU2F0aXQgUmlhbnBpdCIsImVtYWlsIjoicmlhbnBpdEBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6ImFkbWluIn0.94ykjL9V5V94DxkKJabObKO2NilbJF3gdfsq19r81Oc`;
 
       sessionStorage.setItem('token', token);
 
