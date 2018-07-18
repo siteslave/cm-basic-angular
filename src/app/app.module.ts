@@ -10,6 +10,12 @@ import { AdminModule } from './admin/admin.module';
 import { StaffModule } from './staff/staff.module';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { AccessDeniedComponent } from './shared/access-denied/access-denied.component';
+import { JwtModule } from '../../node_modules/@auth0/angular-jwt';
+import { HttpClientModule } from '../../node_modules/@angular/common/http';
+
+export function tokenGetter() {
+  return sessionStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -22,6 +28,16 @@ import { AccessDeniedComponent } from './shared/access-denied/access-denied.comp
     AppRoutingModule,
     ClarityModule,
     BrowserAnimationsModule,
+
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:8080', 'ict.moph.go.th'],
+        blacklistedRoutes: ['localhost:8080/login/']
+      }
+    }),
+
     LoginModule,
     AdminModule,
     StaffModule
