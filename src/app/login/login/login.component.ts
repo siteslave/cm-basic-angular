@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../../node_modules/@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   ];
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
     this.checkToken();
@@ -50,29 +51,39 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  doLogin() {
-    if (this.username === 'admin' && this.password === 'admin') {
-      // go main page
-      this.isError = false;
-      let token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1MzE4MDE0MzcsImV4cCI6MTU2MzMzNzQzNywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsImZ1bGxuYW1lIjoiU2F0aXQgUmlhbnBpdCIsImVtYWlsIjoicmlhbnBpdEBnbWFpbC5jb20iLCJ1c2VyVHlwZSI6ImFkbWluIn0.94ykjL9V5V94DxkKJabObKO2NilbJF3gdfsq19r81Oc`;
+  async doLogin() {
 
-      sessionStorage.setItem('token', token);
+    try {
+      let rs: any = await this.loginService.doLogin(
+        this.username,
+        this.password,
+        this.typeId
+      );
 
-      let decoded = this.jwtHelper.decodeToken(token);
-      console.log(decoded);
+      if (rs.ok) {
+        this.isError = false;
+        let token = rs.token;
 
-      sessionStorage.setItem('fullname', decoded.fullname);
-      sessionStorage.setItem('email', decoded.email);
+        sessionStorage.setItem('token', token);
 
-      if (this.typeId === '1') {
-        this.router.navigateByUrl('/admin');
+        let decoded = this.jwtHelper.decodeToken(token);
+        console.log(decoded);
+
+        sessionStorage.setItem('fullname', decoded.fullname);
+
+        if (this.typeId === '1') {
+          this.router.navigateByUrl('/admin');
+        } else {
+          this.router.navigateByUrl('/staff');
+        }
       } else {
-        this.router.navigateByUrl('/staff');
+        this.isError = true;
       }
 
-    } else {
-      this.isError = true;
+    } catch (error) {
+
     }
+
   }
 
 }
