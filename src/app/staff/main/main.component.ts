@@ -8,6 +8,8 @@ import { RequestService } from '../request.service';
 })
 export class MainComponent implements OnInit {
 
+  requests = [];
+
   constructor(private requestServie: RequestService) { }
 
   ngOnInit() {
@@ -18,6 +20,7 @@ export class MainComponent implements OnInit {
     try {
       let rs: any = await this.requestServie.getRequest();
       console.log(rs);
+      this.requests = rs.rows;
     } catch (error) {
 
     }
