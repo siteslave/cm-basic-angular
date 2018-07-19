@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StandardService } from '../../shared/standard.service';
 import { RequestService } from '../request.service';
+import { Router } from '../../../../node_modules/@angular/router';
+import { AlertService } from '../../shared/alert.service';
 
 @Component({
   selector: 'app-request',
@@ -16,7 +18,9 @@ export class RequestComponent implements OnInit {
 
   constructor(
     private standardService: StandardService,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -46,12 +50,15 @@ export class RequestComponent implements OnInit {
       );
 
       if (rs.ok) {
-        console.log('OK!!!!');
+        this.alertService.success();
+        this.router.navigateByUrl('/staff/main');
       } else {
+        this.alertService.error();
         console.log(rs.error);
       }
 
     } catch (error) {
+      this.alertService.error();
       console.error(error);
     }
   }

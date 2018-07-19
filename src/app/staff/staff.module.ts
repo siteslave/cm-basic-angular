@@ -12,6 +12,7 @@ import { ThaiDatePipe } from '../shared/thai-date.pipe';
 import { ShortTimePipe } from '../shared/short-time.pipe';
 import { FormsModule } from '../../../node_modules/@angular/forms';
 import { StandardService } from '../shared/standard.service';
+import { AlertService } from '../shared/alert.service';
 
 @NgModule({
   imports: [
@@ -27,6 +28,11 @@ import { StandardService } from '../shared/standard.service';
     ThaiDatePipe,
     ShortTimePipe
   ],
-  providers: [AuthGuardService, StaffGuardService, StandardService]
+  providers: [
+    AuthGuardService,
+    StaffGuardService,
+    StandardService,
+    AlertService
+  ]
 })
 export class StaffModule { }
