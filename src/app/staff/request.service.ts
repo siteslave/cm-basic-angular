@@ -11,4 +11,13 @@ export class RequestService {
   getRequest() {
     return this.http.get('http://localhost:8080/request').toPromise();
   }
+
+  saveRequest(cause: string, categoryId: any, remark: any) {
+    let body = {
+      cause: cause,
+      categoryId: categoryId,
+      remark: remark
+    };
+    return this.http.post('http://localhost:8080/request', body).toPromise();
+  }
 }
