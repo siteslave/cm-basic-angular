@@ -10,11 +10,14 @@ import { AuthGuardService } from '../shared/auth-guard.service';
 import { StaffGuardService } from '../shared/staff-guard.service';
 import { ThaiDatePipe } from '../shared/thai-date.pipe';
 import { ShortTimePipe } from '../shared/short-time.pipe';
+import { FormsModule } from '../../../node_modules/@angular/forms';
+import { StandardService } from '../shared/standard.service';
 
 @NgModule({
   imports: [
     CommonModule,
     ClarityModule,
+    FormsModule,
     StaffRoutingModule
   ],
   declarations: [
@@ -24,6 +27,6 @@ import { ShortTimePipe } from '../shared/short-time.pipe';
     ThaiDatePipe,
     ShortTimePipe
   ],
-  providers: [AuthGuardService, StaffGuardService]
+  providers: [AuthGuardService, StaffGuardService, StandardService]
 })
 export class StaffModule { }

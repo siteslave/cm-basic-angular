@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+.form .form-group, form .form-group  {
+    padding-left: 5.5rem;
+}
+
+.form .form-group>label:first-child, .form .form-group>span:first-child, form .form-group>label:first-child, form .form-group>span:first-child {
+    width: 5.5rem;
+}

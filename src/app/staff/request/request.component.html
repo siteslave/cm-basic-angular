@@ -1,3 +1,33 @@
-<p>
-  request works!
-</p>
+<form>
+  <section class="form-block">
+    <label for="">ข้อมูลการแจ้งซ่อม</label>
+    <div class="form-group">
+      <label for="cause">ข้อความ</label>
+      <input type="text" style="width: 100%;" name="cause" [(ngModel)]="cause" placeholder="ข้อความ...">
+    </div>
+
+    <div class="form-group">
+      <label for="categoryId">ประเภท</label>
+      <div class="select">
+        <select name="categoryId" [(ngModel)]="categoryId">
+          <option *ngFor="let c of categories" [value]="c.request_category_id">
+            {{ c.request_category_name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="remark">รายละเอียด</label>
+      <textarea name="remark" [(ngModel)]="remark" cols="30" rows="5"></textarea>
+    </div>
+
+    <button class="btn btn-danger">
+      <clr-icon shape="home"></clr-icon>
+      ยกเลิก
+    </button>
+    <button class="btn btn-success" (click)="save()" [disabled]="!remark || !categoryId || !cause">
+      <clr-icon shape="floppy"></clr-icon>
+      บันทึกข้อมูล</button>
+  </section>
+</form>
