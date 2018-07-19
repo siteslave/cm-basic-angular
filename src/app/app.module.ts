@@ -21,7 +21,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
   ],
   imports: [
     BrowserModule,

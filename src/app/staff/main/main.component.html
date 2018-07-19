@@ -7,7 +7,7 @@
 
   <clr-dg-row *ngFor="let req of requests">
     <clr-dg-cell>{{ req.request_code }}</clr-dg-cell>
-    <clr-dg-cell>{{ req.request_date | date }} {{ req.request_time }}</clr-dg-cell>
+    <clr-dg-cell>{{ req.request_date | thaiDate }} {{ req.request_time | shortTime }}</clr-dg-cell>
     <clr-dg-cell>{{ req.request_cause }}</clr-dg-cell>
     <clr-dg-cell>{{ req.request_category_name }}</clr-dg-cell>
     <clr-dg-cell style="text-align: center;">
