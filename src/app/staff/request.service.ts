@@ -8,8 +8,9 @@ export class RequestService {
 
   constructor(private http: HttpClient) { }
 
-  getRequest() {
-    return this.http.get('http://localhost:8080/request').toPromise();
+  getRequest(limit: number, offset: number) {
+    return this.http.get('http://localhost:8080/request?limit=' + limit + '&offset=' + offset)
+      .toPromise();
   }
 
   saveRequest(cause: string, categoryId: any, remark: any) {
