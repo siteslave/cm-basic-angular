@@ -1,22 +1,37 @@
-<clr-datagrid>
-  <clr-dg-column>User ID</clr-dg-column>
-  <clr-dg-column>Name</clr-dg-column>
-  <clr-dg-column>Creation date</clr-dg-column>
-  <clr-dg-column>Favorite color</clr-dg-column>
+<clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+  <clr-dg-column>รหัสแจ้ง</clr-dg-column>
+  <clr-dg-column>วันที่/เวลา</clr-dg-column>
+  <clr-dg-column>อาการที่แจ้ง</clr-dg-column>
+  <clr-dg-column>ประเภท</clr-dg-column>
+  <clr-dg-column>สถานะ</clr-dg-column>
+  <clr-dg-column>#</clr-dg-column>
 
-  <clr-dg-row *ngFor="let user of users">
-    <clr-dg-action-overflow>
-      <button class="action-item" (click)="onEdit(user)">Edit</button>
-      <button class="action-item" (click)="onDelete(user)">Delete</button>
-    </clr-dg-action-overflow>
-    <clr-dg-cell>{{user.id}}</clr-dg-cell>
-    <clr-dg-cell>{{user.name}}</clr-dg-cell>
-    <clr-dg-cell>{{user.creation | date}}</clr-dg-cell>
-    <clr-dg-cell>{{user.color}}</clr-dg-cell>
+  <clr-dg-row *ngFor="let req of requests" [ngStyle]="{'background-color': req.color}">
+    <clr-dg-cell>{{ req.request_code }}</clr-dg-cell>
+    <clr-dg-cell>{{ req.request_date | thaiDate }} {{ req.request_time | shortTime }}</clr-dg-cell>
+    <clr-dg-cell>{{ req.request_cause }}</clr-dg-cell>
+    <clr-dg-cell>{{ req.request_category_name }}</clr-dg-cell>
+    <clr-dg-cell>{{ req.request_status_name }}</clr-dg-cell>
+    <clr-dg-cell style="text-align: center;">
+      <div class="btn-group">
+        <button (click)="openModal(req.request_id)" class="btn btn-sm btn-icon btn-success">
+          <clr-icon shape="note"></clr-icon>
+        </button>
+        <button [disabled]="req.request_status_id == 4 || req.request_status_id == 5" routerLink="/staff/request" [queryParams]="{requestId: req.request_id}"
+          class="btn btn-sm btn-icon btn-primary">
+          <clr-icon shape="pencil"></clr-icon>
+        </button>
+        <button [disabled]="req.request_status_id == 4 || req.request_status_id == 5" (click)="removeRequest(req.request_id)" class="btn btn-sm btn-icon btn-danger">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
   </clr-dg-row>
+
   <clr-dg-footer>
-    <clr-dg-pagination #pagination [clrDgPageSize]="10">
-      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} users
+    <clr-dg-pagination #pagination [clrDgPageSize]="perPage" [clrDgTotalItems]="total">
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} จาก {{pagination.totalItems}} รายการ
     </clr-dg-pagination>
   </clr-dg-footer>
+
 </clr-datagrid>

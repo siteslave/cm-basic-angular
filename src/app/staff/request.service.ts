@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -6,10 +6,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RequestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    @Inject('API_URL') private url: string
+  ) { }
 
   getRequest(limit: number, offset: number) {
-    return this.http.get('http://localhost:8080/request?limit=' + limit + '&offset=' + offset)
+    return this.http.get(this.url + '/request?limit=' + limit + '&offset=' + offset)
       .toPromise();
   }
 
@@ -19,7 +22,7 @@ export class RequestService {
       categoryId: categoryId,
       remark: remark
     };
-    return this.http.post('http://localhost:8080/request', body).toPromise();
+    return this.http.post(this.url + '/request', body).toPromise();
   }
 
   updateRequest(requestId: any, cause: string, categoryId: any, remark: any) {
@@ -28,19 +31,19 @@ export class RequestService {
       categoryId: categoryId,
       remark: remark
     };
-    return this.http.put('http://localhost:8080/request/' + requestId, body).toPromise();
+    return this.http.put(this.url + '/request/' + requestId, body).toPromise();
   }
 
   getLogs(requestId: any) {
-    return this.http.get('http://localhost:8080/request/logs/' + requestId).toPromise();
+    return this.http.get(this.url + '/request/logs/' + requestId).toPromise();
   }
 
   removeRequest(requestId: any) {
-    return this.http.delete('http://localhost:8080/request/' + requestId).toPromise();
+    return this.http.delete(this.url + '/request/' + requestId).toPromise();
   }
 
   getRequestDetail(requestId: any) {
-    return this.http.get('http://localhost:8080/request/' + requestId).toPromise();
+    return this.http.get(this.url + '/request/' + requestId).toPromise();
   }
 
 }

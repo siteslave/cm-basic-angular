@@ -6,12 +6,15 @@ import { LayoutComponent } from './layout/layout.component';
 import { HomeComponent } from './home/home.component';
 import { ClarityModule } from '../../../node_modules/@clr/angular';
 import { AdminGuardService } from '../shared/admin-guard.service';
+import { ThaiDatePipe } from '../shared/thai-date.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     ClarityModule,
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule
   ],
   declarations: [LayoutComponent, HomeComponent],
   providers: [AdminGuardService]

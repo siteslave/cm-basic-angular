@@ -13,20 +13,20 @@ import { ShortTimePipe } from '../shared/short-time.pipe';
 import { FormsModule } from '../../../node_modules/@angular/forms';
 import { StandardService } from '../shared/standard.service';
 import { AlertService } from '../shared/alert.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ClarityModule,
     FormsModule,
-    StaffRoutingModule
+    StaffRoutingModule,
+    SharedModule
   ],
   declarations: [
     LayoutComponent,
     MainComponent,
     RequestComponent,
-    ThaiDatePipe,
-    ShortTimePipe
   ],
   providers: [
     AuthGuardService,

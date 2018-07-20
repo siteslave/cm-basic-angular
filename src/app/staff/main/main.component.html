@@ -3,22 +3,25 @@
   <clr-dg-column>วันที่/เวลา</clr-dg-column>
   <clr-dg-column>อาการที่แจ้ง</clr-dg-column>
   <clr-dg-column>ประเภท</clr-dg-column>
+  <clr-dg-column>สถานะ</clr-dg-column>
   <clr-dg-column>#</clr-dg-column>
 
-  <clr-dg-row *ngFor="let req of requests">
+  <clr-dg-row *ngFor="let req of requests" [ngStyle]="{'background-color': req.color}">
     <clr-dg-cell>{{ req.request_code }}</clr-dg-cell>
     <clr-dg-cell>{{ req.request_date | thaiDate }} {{ req.request_time | shortTime }}</clr-dg-cell>
     <clr-dg-cell>{{ req.request_cause }}</clr-dg-cell>
     <clr-dg-cell>{{ req.request_category_name }}</clr-dg-cell>
+    <clr-dg-cell>{{ req.request_status_name }}</clr-dg-cell>
     <clr-dg-cell style="text-align: center;">
       <div class="btn-group">
         <button (click)="openModal(req.request_id)" class="btn btn-sm btn-icon btn-success">
           <clr-icon shape="note"></clr-icon>
         </button>
-        <button routerLink="/staff/request" [queryParams]="{requestId: req.request_id}" class="btn btn-sm btn-icon btn-primary">
+        <button [disabled]="req.request_status_id == 4 || req.request_status_id == 5" routerLink="/staff/request" [queryParams]="{requestId: req.request_id}"
+          class="btn btn-sm btn-icon btn-primary">
           <clr-icon shape="pencil"></clr-icon>
         </button>
-        <button (click)="removeRequest(req.request_id)" class="btn btn-sm btn-icon btn-danger">
+        <button [disabled]="req.request_status_id == 4 || req.request_status_id == 5" (click)="removeRequest(req.request_id)" class="btn btn-sm btn-icon btn-danger">
           <clr-icon shape="trash"></clr-icon>
         </button>
       </div>

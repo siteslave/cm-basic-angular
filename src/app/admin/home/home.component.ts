@@ -12,9 +12,15 @@ export class HomeComponent implements OnInit {
     creation: '11/12/2018',
     color: 'red'
   }];
+
+  requests = [];
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  refresh($event) {
+
+  }
 }

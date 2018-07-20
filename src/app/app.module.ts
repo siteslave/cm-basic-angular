@@ -13,6 +13,9 @@ import { AccessDeniedComponent } from './shared/access-denied/access-denied.comp
 import { JwtModule } from '../../node_modules/@auth0/angular-jwt';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 
+import { environment } from '../environments/environment';
+import { LocationStrategy, HashLocationStrategy } from '../../node_modules/@angular/common';
+
 export function tokenGetter() {
   return sessionStorage.getItem('token');
 }
@@ -33,8 +36,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:8080', 'ict.moph.go.th'],
-        blacklistedRoutes: ['localhost:8080/login/']
+        whitelistedDomains: [environment.whiteUrl],
+        blacklistedRoutes: [environment.blackUrl]
       }
     }),
 
@@ -42,7 +45,11 @@ export function tokenGetter() {
     AdminModule,
     StaffModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'API_URL', useValue: environment.apiUrl },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
