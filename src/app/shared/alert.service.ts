@@ -26,4 +26,17 @@ export class AlertService {
     });
   }
 
+  confirm() {
+    return swal({
+      title: 'Are you sure?',
+      text: "ต้องการทำรายการนี้ ใช่หรือไม่!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ใช่',
+      cancelButtonText: 'ไม่ใช่'
+    });
+  }
+
 }

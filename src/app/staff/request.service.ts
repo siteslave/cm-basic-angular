@@ -21,4 +21,13 @@ export class RequestService {
     };
     return this.http.post('http://localhost:8080/request', body).toPromise();
   }
+
+  getLogs(requestId: any) {
+    return this.http.get('http://localhost:8080/request/logs/' + requestId).toPromise();
+  }
+
+  removeRequest(requestId: any) {
+    return this.http.delete('http://localhost:8080/request/' + requestId).toPromise();
+  }
+
 }

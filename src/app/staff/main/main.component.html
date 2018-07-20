@@ -11,9 +11,17 @@
     <clr-dg-cell>{{ req.request_cause }}</clr-dg-cell>
     <clr-dg-cell>{{ req.request_category_name }}</clr-dg-cell>
     <clr-dg-cell style="text-align: center;">
-      <button class="btn btn-sm btn-icon btn-success">
-        <clr-icon shape="note"></clr-icon>
-      </button>
+      <div class="btn-group">
+        <button (click)="openModal(req.request_id)" class="btn btn-sm btn-icon btn-success">
+          <clr-icon shape="note"></clr-icon>
+        </button>
+        <button (click)="openModal(req.request_id)" class="btn btn-sm btn-icon btn-primary">
+          <clr-icon shape="pencil"></clr-icon>
+        </button>
+        <button (click)="removeRequest(req.request_id)" class="btn btn-sm btn-icon btn-danger">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+      </div>
     </clr-dg-cell>
   </clr-dg-row>
 
@@ -24,3 +32,25 @@
   </clr-dg-footer>
 
 </clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="isOpen" [clrModalSize]="'lg'" [clrModalClosable]="false">
+  <h3 class="modal-title">ประวัติการดำเนินการของช่าง</h3>
+  <div class="modal-body">
+
+    <clr-stack-view>
+      <clr-stack-block [clrSbExpanded]="true" *ngFor="let log of requestLogs">
+        <clr-stack-label>วันที่ {{log.created_at | thaiDate}}</clr-stack-label>
+        <clr-stack-content>ช่าง {{ log.first_name }} {{ log.last_name }}</clr-stack-content>
+        <clr-stack-block>
+          <clr-stack-label>กิจกรรมที่ทำ</clr-stack-label>
+          <clr-stack-content>{{ log.request_logs }}</clr-stack-content>
+        </clr-stack-block>
+
+      </clr-stack-block>
+    </clr-stack-view>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="isOpen = false">ตกลง</button>
+  </div>
+</clr-modal>
