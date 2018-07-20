@@ -30,4 +30,8 @@ export class RequestService {
     return this.http.delete('http://localhost:8080/request/' + requestId).toPromise();
   }
 
+  getRequestDetail(requestId: any) {
+    return this.http.get('http://localhost:8080/request/' + requestId).toPromise();
+  }
+
 }

@@ -15,7 +15,7 @@
         <button (click)="openModal(req.request_id)" class="btn btn-sm btn-icon btn-success">
           <clr-icon shape="note"></clr-icon>
         </button>
-        <button (click)="openModal(req.request_id)" class="btn btn-sm btn-icon btn-primary">
+        <button routerLink="/staff/request" [queryParams]="{requestId: req.request_id}" class="btn btn-sm btn-icon btn-primary">
           <clr-icon shape="pencil"></clr-icon>
         </button>
         <button (click)="removeRequest(req.request_id)" class="btn btn-sm btn-icon btn-danger">
