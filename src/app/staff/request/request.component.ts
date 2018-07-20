@@ -69,11 +69,23 @@ export class RequestComponent implements OnInit {
 
   async save() {
     try {
-      let rs: any = await this.requestService.saveRequest(
-        this.cause,
-        this.categoryId,
-        this.remark
-      );
+
+      let rs: any;
+
+      if (this.requestId) {
+        rs = await this.requestService.updateRequest(
+          this.requestId,
+          this.cause,
+          this.categoryId,
+          this.remark
+        );
+      } else {
+        rs = await this.requestService.saveRequest(
+          this.cause,
+          this.categoryId,
+          this.remark
+        );
+      }
 
       if (rs.ok) {
         this.alertService.success();

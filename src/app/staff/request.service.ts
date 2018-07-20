@@ -22,6 +22,15 @@ export class RequestService {
     return this.http.post('http://localhost:8080/request', body).toPromise();
   }
 
+  updateRequest(requestId: any, cause: string, categoryId: any, remark: any) {
+    let body = {
+      cause: cause,
+      categoryId: categoryId,
+      remark: remark
+    };
+    return this.http.put('http://localhost:8080/request/' + requestId, body).toPromise();
+  }
+
   getLogs(requestId: any) {
     return this.http.get('http://localhost:8080/request/logs/' + requestId).toPromise();
   }
